@@ -1,0 +1,99 @@
+@import 'tailwindcss';
+
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+
+    --color-ink: #16233b;
+    --color-ink-soft: #4a5872;
+    --color-paper: #f3f6f9;
+    --color-line: #d3dbe4;
+    --color-volt: #f2c200;
+    --color-volt-soft: #fff4c2;
+    --color-grid: #1f7a6d;
+    --color-grid-soft: #dcf0ec;
+    --color-danger: #b42318;
+    --color-danger-soft: #fdecea;
+}
+
+@layer base {
+    html {
+        font-feature-settings: 'tnum' 1;
+    }
+
+    body {
+        @apply bg-paper text-ink antialiased;
+        font-variant-numeric: tabular-nums;
+    }
+
+    :focus-visible {
+        outline: 3px solid var(--color-volt);
+        outline-offset: 2px;
+    }
+}
+
+@layer components {
+    .field-label {
+        @apply mb-1.5 block text-sm font-semibold text-ink;
+    }
+
+    .field-input {
+        @apply block w-full rounded-md border border-line bg-white px-3 py-2 text-[15px] text-ink shadow-[inset_0_1px_0_rgba(22,35,59,0.04)] transition-colors placeholder:text-ink-soft/60 hover:border-ink-soft/50 focus:border-ink focus:outline-none;
+    }
+
+    /* Replace the native arrow so it sits clear of the right edge. */
+    select.field-input {
+        @apply appearance-none bg-size-[1rem] bg-position-[right_0.75rem_center] bg-no-repeat pr-10;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5872' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    }
+
+    .field-input[aria-invalid='true'] {
+        @apply border-danger;
+    }
+
+    .field-error {
+        @apply mt-1.5 text-sm text-danger;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .btn-primary {
+        @apply bg-ink text-white hover:bg-ink/90;
+    }
+
+    .btn-secondary {
+        @apply border border-line bg-white text-ink hover:border-ink-soft/60;
+    }
+
+    .btn-danger {
+        @apply text-danger hover:bg-danger-soft;
+    }
+
+    .data-table {
+        @apply w-full border-collapse text-left text-[15px];
+    }
+
+    .data-table th {
+        @apply border-b-2 border-ink px-3 py-2.5 text-sm font-semibold whitespace-nowrap;
+    }
+
+    .data-table td {
+        @apply border-b border-line px-3 py-3 align-middle;
+    }
+
+    .data-table tbody tr:hover td {
+        @apply bg-white;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
